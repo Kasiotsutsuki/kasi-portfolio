@@ -13,10 +13,8 @@ Personal portfolio of B. Kasi Vishwanath, MCA student and AI/ML & full-stack dev
 React, TypeScript, Vite, Tailwind CSS
 
 ## Run locally
-```bash
-npm install
-npm run dev
-```
+    npm install
+    npm run dev
 
 ## Contact
 kasivishwanath0000@gmail.com | [GitHub](https://github.com/Kasiotsutsuki)
