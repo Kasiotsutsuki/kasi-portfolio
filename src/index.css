@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+:root {
+  --bg-orange: #FF7A0A;
+  --font-heading: 'HelveticaNowDisplay-Medium', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'HelveticaNowDisplayW01-Rg', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-orange);
+}
+
+body {
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-orange);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Hero Section Base: 100svh, min-height: 600px, touch-action: pan-y */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  background-color: var(--bg-orange);
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+/* Avatar Video Wrapper: position: absolute; inset: 0; overflow: hidden; */
+.avatar-video-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  background-color: var(--bg-orange);
+}
+
+/* Mobile (<640px): video box takes the top 55% of the hero only, full width */
+@media (max-width: 639.98px) {
+  .avatar-video-wrapper {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 55%;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  }
+}
+
+/* Tablet (640px–1023.98px): right-aligned box with soft left edge fade */
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .avatar-video-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: 62%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%);
+  }
+}
+
+/* Desktop (>=1024px): right-aligned box with soft left edge fade */
+@media (min-width: 1024px) {
+  .avatar-video-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: 58%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 20%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 20%);
+  }
+}
+
+/* Avatar Video:
+   width: 100%; height: 100%; object-fit: cover;
+   object-position: var(--pos-x) var(--pos-y);
+   transform: scale(var(--scale)); transform-origin: top left;
+   --scale must never go below 1.12 at any width (crops out bottom-right KlingAI watermark).
+   Soft edge fade preserved.
+*/
+.avatar-video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--pos-x) var(--pos-y);
+  transform: scale(var(--scale));
+  transform-origin: top left;
+  pointer-events: none;
+  user-select: none;
+  background-color: var(--bg-orange);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
+                      linear-gradient(to bottom, transparent 0%, black 8%, black 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
+              linear-gradient(to bottom, transparent 0%, black 8%, black 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transition: object-position 0.2s ease-out, transform 0.2s ease-out;
+
+  /* Default base fallback: character placed in right half with zero overlap */
+  --pos-x: 70%;
+  --pos-y: center;
+  --scale: 1.12;
+}
+
+/* Mobile (<640px):
+   Video box takes top 55% with object-fit: cover;
+   --pos-x: 66%; --pos-y: 15%; --scale: 1.18;
+   Both eyes and face visible, eyebrows uncropped, watermark pushed outside bottom-right
+*/
+@media (max-width: 639.98px) {
+  .avatar-video-bg {
+    --pos-x: clamp(62%, 58% + 2vw, 66%);
+    --pos-y: 15%;
+    --scale: clamp(1.16, 1.14 + 0.01vw, 1.2);
+  }
+}
+
+/* Tablet (640px–1023.98px):
+   Inside the 62% right-aligned wrapper: width: 100%; height: 100%; object-fit: cover;
+   object-position: 45% 18%; transform: scale(1.12); transform-origin: top left;
+*/
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .avatar-video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 45% 18%;
+    transform: scale(1.12);
+    transform-origin: top left;
+  }
+}
+
+/* Desktop (>=1024px):
+   Inside the 58% right-aligned wrapper: width: 100%; height: 100%; object-fit: cover;
+   object-position: 50% 15%; transform: scale(1.15); transform-origin: top left;
+*/
+@media (min-width: 1024px) {
+  .avatar-video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 15%;
+    transform: scale(1.15);
+    transform-origin: top left;
+  }
+}
+
+/* Hero Content Column (Two-column layout on tablet & desktop for zero overlap) */
+.hero-content-column {
+  width: 100%;
+}
+
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .hero-content-column {
+    max-width: 44vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-content-column {
+    max-width: min(42vw, 560px);
+  }
+}
+
+/* Dark-orange scrim behind hero text: covers bottom 45% of the hero */
+.hero-scrim {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(120, 40, 0, 0.6) 0%, rgba(120, 40, 0, 0.25) 50%, transparent 100%);
+}
