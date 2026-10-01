@@ -1,20 +1,22 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Kasi Vishwanath | Portfolio
 
-# Run and deploy your AI Studio app
+Personal portfolio of B. Kasi Vishwanath, MCA student and AI/ML & full-stack developer.
 
-This contains everything you need to run your app locally.
+**Live:** https://myportfolio-xi-eight-91.vercel.app/
 
-View your app in AI Studio: https://ai.studio/apps/8df61b35-1039-446f-8480-39053e9ee77d
+## Highlights
+- Interactive hero: the character's eyes follow your cursor (video scrubbing, touch supported)
+- Fully responsive across mobile, tablet and desktop
+- Projects: AI Banking Fraud Detection, PlantDoctor AI, Log Monitoring Automation
 
-## Run Locally
+## Tech
+React, TypeScript, Vite, Tailwind CSS
 
-**Prerequisites:**  Node.js
+## Run locally
+```bash
+npm install
+npm run dev
+```
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Contact
+kasivishwanath0000@gmail.com | [GitHub](https://github.com/Kasiotsutsuki)
